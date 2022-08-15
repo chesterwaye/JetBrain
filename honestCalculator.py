@@ -4,6 +4,29 @@ msg_2 = "Yes ... an interesting math operation. You've slept through all classes
 msg_3 = "Yeah... division by zero. Smart move..."
 msg_4 = "Do you want to store the result? (y / n):"
 msg_5 = "Do you want to continue calculations? (y / n):"
+msg_6 = " ... lazy"
+msg_7 = " ... very lazy"
+msg_8 = " ... very, very lazy"
+msg_9 = "You are"
+
+def check(v1,v2,v3):
+    msg = ""
+    if is_one_digit(v1) and is_one_digit(v2):
+        msg += msg_6
+    if ((v1 == 1 or v2 == 2) and v3 == "*"):
+        msg += msg_7
+    if ((v1 == 0 or v2 == 0) and (v3 == "*" or v3 == "+" or v3 == "-")):
+        msg += msg_8
+    if (msg != ""):
+        msg = msg_9 + msg
+        print(msg)
+
+def is_one_digit(v):
+    if  -10 < v < 10 and v.is_integer():
+        return True
+    else:
+        return False
+
 
 result = 0
 memory = 0
@@ -28,8 +51,10 @@ while running:
     except:
         print(msg_1)
         continue
-    
+
+
     if oper in ["-", "+", "*", "/"]:
+        check(x,y,oper)
         if oper == "+":
             result = x + y
         elif oper == "-":
