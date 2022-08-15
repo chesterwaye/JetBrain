@@ -7,23 +7,29 @@ msg_5 = "Do you want to continue calculations? (y / n):"
 
 result = 0
 memory = 0
+running = True
 
 operation = {"-", "+", "*", "/"}
 
-while True:
+while running:
     print(msg_0)
     calc = input()
-    x, oper, y = calc.split()
+    x,oper, y = calc.split()
+    
 
     try:
+        if x == "M":
+            x = memory
+        if y == "M":
+            y = memory
         x = float(x)
         y = float(y)
-
+        
     except:
         print(msg_1)
         continue
-
-    if oper in operation:
+    
+    if oper in ["-", "+", "*", "/"]:
         if oper == "+":
             result = x + y
         elif oper == "-":
@@ -35,8 +41,24 @@ while True:
         else:
             print(msg_3)
             continue
+        
+        
     else:
         print(msg_2)
         continue
-    break
-print(result)
+    #break
+    print(result)
+
+    answer = ""
+    while answer != "y" and answer != "n":
+        print(msg_4)
+        answer = input()
+        if answer == "y":
+            memory = result
+
+    answer = ""
+    while answer != "y" and answer != "n":
+        print(msg_5)
+        answer = input()
+        if answer == "n":
+            running = False
